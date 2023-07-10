@@ -10,15 +10,26 @@ class TimeViewModel extends BaseViewModel {
   List<Course> _courses = List.empty();
   List<Course> get courses => _courses;
 
+  /// init
   TimeViewModel() { 
     getCourses();
   }
 
+  /// Update the list of courses in the UI
   void getCourses() {
     coursesData.getCourses().then((courses) => {
       _courses = courses,
       notifyListeners()     
       }
     );
+  }
+
+  /// Callback function when the user adds time to a course
+  void updateCourseMinutes(Course course, int hours, int minutes) { 
+    int totalMinutes = 60*hours + minutes;
+    coursesData
+      .updateCourseMinutes(course, totalMinutes)
+      .onError((error, stackTrace) => print(error.toString()))
+      .then((value) => getCourses());
   }
 }
