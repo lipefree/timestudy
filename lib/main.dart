@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'states/appstate.dart';
-import 'ui/views/home/home_view.dart';
+import 'ui/screens/home/home_view.dart';
 
 void main() {
   runApp(MyApp());

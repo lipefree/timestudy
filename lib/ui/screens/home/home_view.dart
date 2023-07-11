@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:namer_app/ui/views/time/time_view.dart';
-import 'package:namer_app/ui/views/time/time_viewmodel.dart';
+import 'package:namer_app/ui/screens/time/time_view.dart';
 import '../generator/generator_view.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -10,19 +9,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 0;
-  TimeViewModel timeViewModel = TimeViewModel();
-
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
-  
+
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = GeneratorPage();
+        page = TimeView();
         break;
       case 1:
-        page = TimeView(timeViewModel: timeViewModel);
+        page = GeneratorPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');

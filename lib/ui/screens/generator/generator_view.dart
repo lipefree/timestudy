@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../states/appstate.dart';
-import '../../components/bigcard.dart';
+import 'bigcard.dart';
 import 'historylistview.dart';
 
 class GeneratorPage extends StatelessWidget {
