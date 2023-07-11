@@ -1,16 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:namer_app/data/course.dart';
 import 'package:namer_app/providers/courses_provider.dart';
 import 'package:namer_app/providers/mock_courses_provider.dart';
-import 'package:stacked/stacked.dart';
 
-class TimeViewModel extends BaseViewModel {
-  //TODO: Change below when a real implementation of coursesdata exists
+class TimeViewModel extends ChangeNotifier {
+//TODO: Change below when a real implementation of coursesdata exists
   CoursesData coursesData = MockCoursesData();
 
   List<Course> _courses = List.empty();
   List<Course> get courses => _courses;
 
-  /// init
   TimeViewModel() {
     getCourses();
   }

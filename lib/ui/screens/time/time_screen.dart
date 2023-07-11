@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:namer_app/ui/screens/time/course_timepicker.dart';
 import 'package:namer_app/ui/screens/time/course_card.dart';
-import 'package:stacked/stacked.dart';
+import 'package:provider/provider.dart';
 
 import '../../../data/course.dart';
 import 'time_viewmodel.dart';
 
-class TimeView extends StatelessWidget {
-  final TimeViewModel timeViewModel = TimeViewModel();
-
+class TimeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.reactive(
-      viewModelBuilder: () => TimeViewModel(),
-      builder: (context, model, child) => Scaffold(
-          body: Column(
+    return ChangeNotifierProvider(
+        create: (context) => TimeViewModel(), child: TimeView());
+  }
+}
+
+class TimeView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var timeScreenState = context.watch<TimeViewModel>();
+    return Scaffold(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (var course in model.courses)
+          // Display a card for each course
+          for (var course in timeScreenState.courses)
             Padding(
                 padding: EdgeInsets.all(8),
                 child: CourseCard(
@@ -26,12 +32,13 @@ class TimeView extends StatelessWidget {
                     final TimeOfDay? time = await getTimePicker(context);
 
                     if (time != null) {
-                      model.updateCourseMinutes(course, time.hour, time.minute);
+                      timeScreenState.updateCourseMinutes(
+                          course, time.hour, time.minute);
                     }
                   },
                 ))
         ],
-      )),
+      ),
     );
   }
 }

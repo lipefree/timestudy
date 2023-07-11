@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:namer_app/ui/screens/time/time_view.dart';
+import 'package:namer_app/ui/screens/time/time_screen.dart';
 import '../generator/generator_view.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = TimeView();
+        page = TimeScreen();
         break;
       case 1:
         page = GeneratorPage();
