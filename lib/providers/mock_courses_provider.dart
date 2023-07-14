@@ -12,19 +12,19 @@ class MockCoursesData implements CoursesData {
   }
 
   @override
-  Future<void> updateCourseMinutes(Course course, int minutes) {
-    // J'ai jamais vu un truc aussi deg, pour une raison inconnu c n'est pas une reference a l'object :( )
+  Future<Course> updateCourseMinutes(Course course, int minutes) {
     if (course.name == "Analyse") {
       analyse = Course(course.name, course.courseId, course.minutesPerWeek,
           course.currentMinutes + minutes);
+      return Future.value(analyse);
     } else if (course.name == "Algebre") {
       algebre = Course(course.name, course.courseId, course.minutesPerWeek,
           course.currentMinutes + minutes);
+      return Future.value(algebre);
     } else {
       physique = Course(course.name, course.courseId, course.minutesPerWeek,
           course.currentMinutes + minutes);
+      return Future.value(physique);
     }
-
-    return Future.value();
   }
 }

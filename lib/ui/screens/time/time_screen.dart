@@ -18,14 +18,27 @@ class TimeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var timeScreenState = context.watch<TimeViewModel>();
+    var colorscheme = Theme.of(context).colorScheme;
+
     return Scaffold(
+      backgroundColor: colorscheme.onInverseSurface,
+      appBar: AppBar(
+        backgroundColor: colorscheme.onInverseSurface,
+        actions: [
+          if (timeScreenState.actions.isNotEmpty)
+            IconButton(
+                onPressed: () => {timeScreenState.revertOneAction()},
+                icon: Icon(Icons.undo)),
+          IconButton(onPressed: () => {}, icon: Icon(Icons.settings))
+        ],
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Display a card for each course
           for (var course in timeScreenState.courses)
             Padding(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
                 child: CourseCard(
                   course: course,
                   onPressedAddHours: (Course course) async {
